@@ -6,6 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :authentication_keys => [:login]
 
+
+  has_many :posts
+
+  validates :username,  presence: true, uniqueness: true
+
   attr_accessor :login
   attr_accessible :username, :email , :password, :password_confirmation, :remember_me, :login
 

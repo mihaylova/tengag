@@ -32,4 +32,10 @@ describe User do
       user.should eq @user
     end
   end
+
+  it { should validate_presence_of(:username) }
+  it { should validate_uniqueness_of(:username) }
+
+  it { should have_many(:posts) }
+  
 end
