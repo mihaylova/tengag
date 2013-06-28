@@ -6,6 +6,6 @@ FactoryGirl.define do
     link "MyString"
     picture "MyString"
     hot false
-    user ""
+    association :user
   end
 end
