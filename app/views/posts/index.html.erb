@@ -21,7 +21,7 @@
         <td><%= link_to post.id, post_path(post) %></td>
         <td><%= post.title %></td>
         <td><%= post.link %></td>
-        <td><%= post.picture %></td>
+        <td><%= image_tag post.picture.url(:large) %></td>
         <td><%= post.hot %></td>
         <td><%= post.user.username %></td>
         <td><%=l post.created_at %></td>

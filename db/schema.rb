@@ -11,16 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627103048) do
+ActiveRecord::Schema.define(:version => 20130628132646) do
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "link"
-    t.string   "picture"
-    t.boolean  "hot",        :default => false
+    t.boolean  "hot",                  :default => false
     t.integer  "user_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"

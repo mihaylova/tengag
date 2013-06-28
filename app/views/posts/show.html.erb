@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:link) %>:</strong></dt>
   <dd><%= @post.link %></dd>
   <dt><strong><%= model_class.human_attribute_name(:picture) %>:</strong></dt>
-  <dd><%= @post.picture %></dd>
+  <dd><%= image_tag @post.picture.url(:medium) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:hot) %>:</strong></dt>
   <dd><%= @post.hot %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
