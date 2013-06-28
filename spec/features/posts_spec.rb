@@ -31,6 +31,8 @@ describe "Posts:" do
         visit new_post_path
 
         fill_in 'Title', with: "Some post title"
+        image_path = Rails.root + 'app/assets/images/images.jpg'
+        attach_file 'post_picture', image_path
         click_on 'Create Post'
       end.to change { Post.count }.by(1)
     end

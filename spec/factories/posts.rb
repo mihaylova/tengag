@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :post do
     title "MyString"
     link "MyString"
-    picture "MyString"
+    picture_file_name 'Picture file name'
     hot false
     association :user
   end
