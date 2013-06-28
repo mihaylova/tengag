@@ -5,9 +5,8 @@ describe ApplicationHelper do
     let(:name) { 'root path' }
     let(:path) { '/some/path' }
 
-
     its 'return link with active class' do
-      helper.stub(full_path: path)
+      helper.stub(:request).and_return stub(fullpath: path)
 
       link = helper.nav_link_to(name, path)
       expected = "<li class=\"active\"><a href=\"#{path}\">#{name}</a></li>"
@@ -16,7 +15,7 @@ describe ApplicationHelper do
     end
 
     its "return link without active class" do
-      helper.stub(full_path: 'not_exisiting')
+      helper.stub(:request).and_return stub(fullpath: '/not_exisiting')
 
       link = helper.nav_link_to(name, path)
       expected = "<li><a href=\"#{path}\">#{name}</a></li>"

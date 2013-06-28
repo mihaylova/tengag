@@ -1,20 +1,22 @@
 module ApplicationHelper
+  class RequestCurrentPath
+    def initialize(fullpath)
+      fullpath.gsub(/\?.*/, '')
+      @current_path = fullpath
+    end
+
+    def active?(path)
+      'active' if path == @current_path
+    end
+  end
+
   def nav_link_to(name = nil, path = nil)
-    content_tag :li, class: current_path?(path) do
+    @request_path ||= RequestCurrentPath.new(request.fullpath)
+
+    content_tag :li, class: @request_path.active?(path) do
       content_tag :a, href: path do
         name
       end
     end
-  end
-
-  def current_path?(path)
-    current_path = full_path
-    current_path.gsub(/\?.*/, '')
-
-    'active' if path == current_path
-  end
-
-  def full_path
-    request.fullpath
   end
 end
