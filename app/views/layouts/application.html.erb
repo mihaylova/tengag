@@ -56,8 +56,8 @@
               <% end %>
             </p>
             <ul class="nav">
-              <li class="active"><a href="#">Hot</a></li>
-              <li><a href="#about">Trending</a></li>
+              <%= nav_link_to 'Hot', root_path %>
+              <%= nav_link_to 'Trending', trending_posts_path %>
               <% if user_signed_in? %>
                 <li><a href="#contact">My posts</a></li>
               <% end %>
