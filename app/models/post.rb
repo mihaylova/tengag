@@ -9,4 +9,7 @@ class Post < ActiveRecord::Base
   validates_attachment :picture, :presence => true
   validates_attachment_size :picture, :less_than=>1.megabyte
   validates :title, :presence => true
+
+  scope :hot, where(hot: true)
+  scope :trending, where(hot: false)
 end

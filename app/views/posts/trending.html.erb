@@ -1,0 +1,31 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+    <% @posts.each do |post| %>
+    <div class="well">
+      
+      <div class="row-fluid">
+        <div class="span 8 offset1">
+          <h4> <%= link_to post.title, post_path(post) %> </h4>
+        </div>
+        <div class="span8 offset1">
+          
+          <%= image_tag post.picture.url(:large) %>
+        </div>
+        <div class="span2">
+         <span>
+            From <%= post.user.username %>
+          </span>
+          <br>
+          <span>
+            Before <%=time_ago_in_words (post.created_at) %>
+          </span>
+          
+        </div>
+    </div>
+      
+    </div>
+    <hr>
+    <% end %>

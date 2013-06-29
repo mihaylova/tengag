@@ -1,10 +1,28 @@
 class PostsController < ApplicationController
 
-  before_filter :authenticate_user!, except: :index
+  before_filter :authenticate_user!, :except => [:index, :hot,  :trending, :show]
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+  def hot
+    @posts = Post.hot
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+  def trending
+    @posts = Post.trending
 
     respond_to do |format|
       format.html # index.html.erb

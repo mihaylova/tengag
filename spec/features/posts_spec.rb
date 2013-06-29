@@ -10,6 +10,27 @@ describe "Posts:" do
       page.should have_content(post.title)
     end
 
+    it 'User can see single post' do
+      Post.should_receive(:find).and_return(post)
+
+      visit post_path(post)
+      page.should have_content(post.title)
+    end
+
+    it 'User can see hot posts' do
+      Post.should_receive(:hot).and_return([post])
+
+      visit hot_posts_path
+      page.should have_content(post.title)
+    end
+
+    it 'User can see trending posts' do
+      Post.should_receive(:trending).and_return([post])
+
+      visit trending_posts_path
+      page.should have_content(post.title)
+    end
+
   context 'When user is logged' do 
     let(:user) { FactoryGirl.create(:user) }
 
@@ -19,12 +40,7 @@ describe "Posts:" do
 
     after(:each) { Warden.test_reset!  }
 
-    it 'can see single post' do
-      Post.should_receive(:find).and_return(post)
-
-      visit post_path(post)
-      page.should have_content(post.title)
-    end
+   
 
     it 'can create post' do
       expect do
@@ -49,7 +65,7 @@ describe "Posts:" do
       page.current_path.should == post_path(post)
     end
 
-    it 'can delete post' do
+    xit 'can delete post' do
       Post.should_receive(:all).and_return([post])
 
       visit posts_path
@@ -60,11 +76,7 @@ describe "Posts:" do
 
   context 'When user is not logged' do
 
-    it 'can not see a post' do
-      Post.stub(:find) { post }
-      visit post_path(post)
-      page.should_not have_content(post.title)
-    end
+    
 
     it 'can not create post' do
       visit new_post_path
