@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :authentication_keys => [:login]
 
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :username,  presence: true, uniqueness: true
 
