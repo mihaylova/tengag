@@ -31,17 +31,56 @@ describe "Posts:" do
       page.should have_content(post.title)
     end
 
+
   context 'When user is logged' do 
     let(:user) { FactoryGirl.create(:user) }
 
     before :each do
-     login_as(user, :scope => :user)
+      login_as(user, :scope => :user)
     end
 
     after(:each) { Warden.test_reset!  }
 
-   
+    context 'in single post page' do
+      before { Post.should_receive(:find).and_return(post) }
 
+
+      context 'form cuurent user' do
+        before do
+          post.user = user 
+          visit post_path(post)
+        end
+
+        it 'can delete its own post' do
+          within '.form-actions' do
+            page.should have_content('Delete')
+          end
+        end
+
+        it 'can edit its own post' do
+          within '.form-actions' do
+            page.should have_content('Edit')
+           end
+        end
+      end
+
+      context 'form other user' do
+        before { visit post_path(post) }
+
+        it 'can not delete post from other users' do
+          within '.form-actions' do
+            page.should_not have_content('Delete')
+          end
+        end
+
+        it 'can not  edit post  from other users' do
+          within '.form-actions' do
+            page.should_not have_content('Edit')
+          end
+        end
+      end
+    end
+    
     it 'can create post' do
       expect do
         visit new_post_path
@@ -65,12 +104,7 @@ describe "Posts:" do
       page.current_path.should == post_path(post)
     end
 
-    xit 'can delete post' do
-      Post.should_receive(:all).and_return([post])
-
-      visit posts_path
-      page.should have_content('Delete')
-    end
+    
 
   end
 
@@ -87,6 +121,17 @@ describe "Posts:" do
       Post.stub(:find) { post }
       visit edit_post_path(post)
       current_path.should == new_user_session_path
+    end
+
+     it 'can not modify posts' do
+      Post.should_receive(:find).and_return(post)
+
+      visit post_path(post)
+      within '.form-actions' do
+        page.should_not have_content('Delete')
+        page.should_not have_content('Edit')
+       
+      end
     end
 
 
