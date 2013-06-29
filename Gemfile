@@ -41,6 +41,11 @@ gem 'simple_form'
 # To use debugger
 # gem 'debugger'
 
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails'
