@@ -21,6 +21,8 @@ class PostsController < ApplicationController
     end
   end
 
+ 
+
   def trending
     @posts = Post.trending
 

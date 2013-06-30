@@ -1,12 +1,15 @@
 Tengag::Application.routes.draw do
-  resources :posts
-
-  root :to => 'posts#hot'
-
   devise_for :users
 
-  match 'hot' => 'posts#hot', as: 'hot_posts'
-  match 'trending' => 'posts#trending', as: 'trending_posts'
+  resources :posts, except: :index
+
+  get 'tags' => 'tags#index'
+  post 'tags/search' => 'tags#search'
+  get 'tags/:tag' => 'tags#show', as: "tags_show"
+
+  get 'trending' => 'posts#trending', as: 'trending_posts'
+  root :to => 'posts#hot'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

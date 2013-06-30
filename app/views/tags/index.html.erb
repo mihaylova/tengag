@@ -1,0 +1,13 @@
+<p> Search posts </p>
+
+<form accept-charset="UTF-8" action="/tags/search" class="simple_form form-horizontal" enctype="multipart/form-data" method="post" novalidate="novalidate">
+  <% @tags.each  do |tag| %>
+  
+  <label class="checkbox">
+ <input class="check_boxes optional" name="tags[]" type="checkbox" value="<%= tag.name%>"><%= tag.name%></label>
+  <% end %>
+  <div class="form-actions">
+    <input class="btn btn-primary" id="submit" name="commit" type="submit" value="Search">
+    
+  </div>
+</form>

@@ -3,10 +3,11 @@
   <%= f.input :link %>
   <%= f.file_field :picture %>
   <%= f.input :hot %>
+  <%= f.association :tags, :as => :check_boxes %>
   
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary', id: 'submit' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                posts_path, :class => 'btn' %>
+                root_path, :class => 'btn' %>
   </div>
 <% end %>

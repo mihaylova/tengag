@@ -25,11 +25,12 @@
           
         </div>
     </div>
-      <p> Tags </p>
+    <p> Tags </p>
       <% post.tags.each do |tag| %>
-        <p> <%= link_to  tag.name, tags_show_path(tag.name) %> </p>
+      <p> <%= tag.name %> </p>
       <% end %>
-      
     </div>
     <hr>
     <% end %>
+ 
+

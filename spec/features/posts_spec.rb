@@ -3,12 +3,7 @@ require 'spec_helper'
 describe "Posts:" do
   let(:post) { FactoryGirl.build(:post, id: 1, created_at: DateTime.now, updated_at: DateTime.now) }
  
-    it 'User can see posts' do
-      Post.should_receive(:all).and_return([post])
-
-      visit posts_path
-      page.should have_content(post.title)
-    end
+    
 
     it 'User can see single post' do
       Post.should_receive(:find).and_return(post)
@@ -20,7 +15,7 @@ describe "Posts:" do
     it 'User can see hot posts' do
       Post.should_receive(:hot).and_return([post])
 
-      visit hot_posts_path
+      visit root_path
       page.should have_content(post.title)
     end
 
@@ -136,4 +131,6 @@ describe "Posts:" do
 
 
   end
+
+  
 end
