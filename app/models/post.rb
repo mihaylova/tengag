@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
-  attr_accessible :hot, :link, :picture, :title, :user, :picture_file_name
+  attr_accessible :hot, :link, :picture, :title, :user, :picture_file_name, :tag_ids
   
   belongs_to :user
+  has_and_belongs_to_many :tags
 
   has_attached_file :picture, 
     :styles => { :medium => "300x300>", :thumb => "100x100>", large: "600x600" }
