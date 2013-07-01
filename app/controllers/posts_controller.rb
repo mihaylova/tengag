@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :hot,  :trending, :show]
+  before_filter :authenticate_user!, :except => [:index, :hot,  :trending, :show, :show_from_user]
   # GET /posts
   # GET /posts.json
   def index
@@ -30,6 +30,17 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @posts }
     end
+  end
+
+
+  def show_from_user
+    @user = User.find(params[:user_id])
+    @posts = Post.find_all_by_user_id(params[:user_id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
+
   end
 
   # GET /posts/1

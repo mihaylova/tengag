@@ -60,7 +60,8 @@
               <%= nav_link_to 'Trending', trending_posts_path %>
               <%= nav_link_to 'Search by tags', tags_path %>
               <% if user_signed_in? %>
-                <li><a href="#contact">My posts</a></li>
+               <%= nav_link_to 'My posts', posts_from_user_path(current_user) %>
+               
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->

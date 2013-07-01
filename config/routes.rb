@@ -7,6 +7,8 @@ Tengag::Application.routes.draw do
   post 'tags/search' => 'tags#search'
   get 'tags/:tag' => 'tags#show', as: "tags_show"
 
+  get 'posts/from_user/:user_id' => 'posts#show_from_user', as: "posts_from_user"
+
   get 'trending' => 'posts#trending', as: 'trending_posts'
   root :to => 'posts#hot'
 

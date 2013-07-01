@@ -99,7 +99,32 @@ describe "Posts:" do
       page.current_path.should == post_path(post)
     end
 
-    
+    describe '#show_from_user' do 
+
+      before do
+        post.user = user
+        Post.should_receive(:find_all_by_user_id).and_return([post])
+        visit posts_from_user_path(user)
+      end
+
+
+      it 'can see its own posts' do
+        page.should have_content(post.title)
+      end
+
+      it 'can see the new post link in page with own posts' do
+        page.should have_link('New', href: new_post_path)
+      end
+
+      it 'can see the delete post link for its own posts' do
+        page.should have_link('Delete', href: post_path(post))
+      end
+
+      it 'can see the edit post link for its own posts' do
+        page.should have_link('Edit', href: edit_post_path(post))
+      end
+
+    end
 
   end
 
@@ -129,6 +154,34 @@ describe "Posts:" do
       end
     end
 
+
+    describe '#show_from_user' do 
+      
+      before do
+        post.user = FactoryGirl.build(:user, id: 1)
+        User.should_receive(:find).and_return(post.user)
+        Post.should_receive(:find_all_by_user_id).and_return([post])
+        visit posts_from_user_path(post.user)
+      end
+
+
+      it 'can see other users posts' do
+        page.should have_content(post.title)
+      end
+
+      it 'can not see the new post link in page with other user posts' do
+        page.should_not have_link('New', href: new_post_path)
+      end
+
+      it 'can not see the delete post link for other user posts' do
+        page.should_not have_link('Delete', href: post_path(post))
+      end
+
+      it 'can not see the edit post link for other user posts' do
+        page.should_not have_link('Edit', href: edit_post_path(post))
+      end
+
+    end
 
   end
 
