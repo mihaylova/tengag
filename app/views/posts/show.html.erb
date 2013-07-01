@@ -20,7 +20,7 @@
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              posts_path, :class => 'btn'  %>
+              root_path, :class => 'btn'  %>
   <% if user_signed_in? && current_user == @post.user %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_post_path(@post), :class => 'btn' %>
